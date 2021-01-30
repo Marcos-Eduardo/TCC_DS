@@ -1,2 +1,1 @@
-# TCC_DS
- Trabalho de Conclusão de Curso desenvolvido no curso técnico em Desenvolvimento de Sistemas na Etec Comendador João Rays.
+O MATEMÁTICA É PARA POUCOS: Dicas práticas de matemática é o Trabalho de Conclusão de Curso que eu desenvolvi no curso técnico em Desenvolvimento de Sistemas na Etec Comendador João Rays. Para saber mais detalhes acesse tudo que foi desenvolvido que no caso é a Documentação, Apresentação e o Projeto.
