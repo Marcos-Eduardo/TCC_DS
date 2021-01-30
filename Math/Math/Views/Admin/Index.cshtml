@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section class="features8 cid-sf0kDfWVvQ mbr-parallax-background mbr-fullscreen" id="features8-2h">
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(35, 35, 35);">
+    </div>
+
+    <div class="container">
+        <h1 class="text-center mb-5 text-white">Área administrativa</h1>
+        <div class="media-container-row">
+            <div class="card col-12 col-md-6 col-lg-4">
+                <div class="card-img">
+                    <span class="mbr-iconfont mbri-edit pl-4"></span>
+                </div>
+                <div class="card-box align-center">
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        Conteúdos
+                    </h4>
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        Clique no botão abaixo para Adicionar, Editar, Vizualizar ou Deletar um Conteúdo.
+                    </p>
+                    <div class="mbr-section-btn text-center">
+                        <a asp-controller="Conteudos" asp-action="Index" class="btn btn-black display-4">
+                            Ir para Conteúdos
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-12 col-md-6 col-lg-4">
+                <div class="card-img">
+                    <span class="mbr-iconfont mbri-growing-chart"></span>
+                </div>
+                <div class="card-box align-center">
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        Níveis
+                    </h4>
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        Clique no botão abaixo para Adicionar, Editar, Vizualizar ou Deletar um Nível.
+                    </p>
+                    <div class="mbr-section-btn text-center">
+                        <a asp-controller="Niveis" asp-action="Index" class="btn btn-black display-4">
+                            Ir para Níveis
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-12 col-md-6 col-lg-4">
+                <div class="card-img">
+                    <span class="mbr-iconfont mbri-video"></span>
+                </div>
+                <div class="card-box align-center">
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        Dicas
+                    </h4>
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        Clique no botão abaixo para Adicionar, Editar, Vizualizar ou Deletar uma Dica.
+                    </p>
+                    <div class="mbr-section-btn text-center">
+                        <a asp-controller="Dicas" asp-action="Index" class="btn btn-black display-4">
+                            Ir para Dicas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

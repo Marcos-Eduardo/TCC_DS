@@ -1,0 +1,60 @@
+﻿@model NivelViewModel
+@{
+    ViewData["Title"] = Model.Nivel.Nome;
+}
+
+<section class="step2 cid-s0NxnHmrZn" id="step2-q">
+
+    <div class="container">
+        <h2 class="mbr-section-title pb-3 mbr-fonts-style align-center display-1">@Model.Nivel.Nome<br></h2>
+
+        <div class="step-container row justify-content-center">
+            @if (Model.Conteudos.Count() == 0)
+            {
+                <section class="features11 cid-sfkwKFZOjW" id="features11-2k">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="media-container-row">
+                                <div class="mbr-figure m-auto" style="width: 50%;">
+                                    <img src="~/fe/assets/images/sad-emoji.png" alt="" title="">
+                                </div>
+                                <div class=" align-left aside-content">
+                                    <h2 class="mbr-title pt-2 mbr-fonts-style display-2">Conteúdos não Encontrados!</h2>
+                                    <div class="mbr-section-text">
+                                        <p class="mbr-text mb-5 pt-3 mbr-light mbr-fonts-style display-5">
+                                            Até o momento esse nível não possui nenhum conteúdo cadastrado, em breve haverá conteúdos disponíveis! Caso tenha uma sugestão clique em Sugerir Conteúdo e nos ajude a compartilhar este conhecimento com milhões de brasileiros.
+                                        </p>
+                                        <div class="mbr-section-btn">
+                                            <a class="btn btn-md btn-black display-4" asp-controller="Home" asp-action="Contato">Sugerir Conteúdo</a>
+                                            <button class="btn btn-md btn-black display-4 rounded-pill" onclick="window.history.back()">Página Anterior</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+            else
+                @foreach (var item in Model.Conteudos)
+                {
+                    <div class="card col-12 pb-4 col-md-4 separline @(item.NumeroOrdem == Model.Conteudos.Count() ? "last-child" : "")">
+                        <div class="step-element">
+                            <div class="step-wrapper pb-3">
+                                <h3 class="step d-flex align-items-center justify-content-center m-auto">
+                                    @item.NumeroOrdem
+                                </h3>
+                            </div>
+                            <div class="step-text-content align-center">
+                                <h4 class="mbr-step-title pb-3 mbr-fonts-style display-5">
+                                    <a asp-controller="Home" asp-action="Dicas" asp-route-id="@item.Id" class="text-black"><strong>@item.Titulo</strong></a>
+                                </h4>
+                                <p class="mbr-step-text mbr-fonts-style display-7">@(item.Descricao.Length > 100 ? string.Concat(item.Descricao.Substring(0, 100), "...") : item.Descricao)</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+</section>
+

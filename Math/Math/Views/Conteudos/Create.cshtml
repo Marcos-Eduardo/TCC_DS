@@ -1,0 +1,42 @@
+﻿@model Conteudo
+
+@{
+    ViewData["Title"] = "Adicionar Conteúdo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container border">
+    <div class="row text-center" style="background-color: #F39F0B">
+        <div class="col-md-12" style="margin-top: 10px;">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+    <div class="row mt-md-5 mb-md-5">
+        <div class="col-md-6 offset-3">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" class="form-control" autofocus />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <textarea asp-for="Descricao" class="form-control"></textarea>
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NivelId" class="control-label"></label>
+                    <select asp-for="NivelId" class="form-control" asp-items="ViewBag.NivelId"></select>
+                </div>
+                <div class="form-group d-inline-flex">
+                    <input type="submit" value="Adicionar" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

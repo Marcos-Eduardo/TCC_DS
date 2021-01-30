@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Nivel>
+
+@foreach (var item in Model)
+{
+    <a class="text-white dropdown-item display-4" asp-controller="Home" asp-action="Conteudos" asp-route-id="@item.Id">
+        @item.Nome
+    </a>
+}

@@ -1,0 +1,91 @@
+﻿@model Conteudo
+
+@{
+    ViewData["Title"] = "Excluir Conteúdo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container border">
+    <div class="row text-center" style="background-color: #F39F0B">
+        <div class="col-md-12" style="margin-top: 10px;">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+    <div class="row text-center mt-md-5 mb-md-5">
+        <div class="col">
+            <h3 class="text-danger">Tem certeza que quer excluir esse Conteúdo permanentemente?</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr class="d-flex">
+                        <th scope="col" class="col-md-3">
+                            @Html.DisplayNameFor(model => model.Titulo)
+                        </th>
+                        <th scope="col" class="col-md-6">
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </th>
+                        <th scope="col" class="col-md-2">
+                            @Html.DisplayNameFor(model => model.Nivel)
+                        </th>
+                        <th scope="col" class="col-md-1 text-center">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" class="d-flex">
+                        <td class="col-md-3">
+                            @{var model = Model;}
+                            @if (model.Titulo.Length > 32)
+                            {
+                                var titulo = model.Titulo.Substring(0, 32);
+                                @Html.DisplayFor(model => titulo)<span>...</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(model => model.Titulo)
+                            }
+                        </td>
+                        <td class="col-md-6">
+                            @if (model.Descricao.Length > 63)
+                            {
+                                var descricao = model.Descricao.Substring(0, 63);
+                                @Html.DisplayFor(model => descricao)<span>...</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(model => model.Descricao)
+                            }
+                        </td>
+                        <td class="col-md-2">
+                            @Html.DisplayFor(model => model.Nivel.Nome)
+                        </td>
+                        <td class="col-md-1">
+                            <div class="row">
+                                <div class="col-md-4 text-center" style="padding: 0 20px;">
+                                    <a asp-action="Details" asp-route-id="@Model.Id"><i style=" font-size: 14pt;" class="fas fa-eye" title="Ver Detalhes"></i></a>
+                                </div>
+                                <div class="col-md-4 text-center" style="padding: 0 20px;">
+                                    <a asp-action="Index"><i style="font-size: 14pt;" class="fas fa-arrow-circle-left text-secondary" title="Voltar"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mb-md-5">
+        <div class="col-md-12">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-info">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

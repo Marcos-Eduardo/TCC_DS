@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Usuario> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link link text-white dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="true">
+            <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>Olá, @User.FindFirst("Apelido").Value
+        </a>
+        <div class="dropdown-menu">
+            <a class="text-white dropdown-item display-4" asp-controller="Account" asp-action="Perfil" asp-route-id="@User.FindFirst("Id").Value">
+                <span class="mbri-rocket mbr-iconfont mbr-iconfont-btn"></span> Meu Perfil
+            </a>
+            <a class="text-white dropdown-item display-4" href="javascript:{}" onclick="document.getElementById('logout').submit(); return false;">
+                <span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span> Sair
+            </a>
+        </div>
+    </li>
+    <form id="logout" asp-controller="Account" asp-action="Logout" method="post" hidden></form>
+}
+else
+{
+    <li class="navbar-buttons mbr-section-btn">
+        <a class="btn btn-sm btn-white-outline display-4" asp-area="" asp-controller="Account" asp-action="LoginRegister">
+            <span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>
+            <span class="display-4"><strong>Entrar</strong></span>
+        </a>
+    </li>
+}

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Nivel>
+
+@{
+    ViewData["Title"] = "Níveis";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container" style="background-color: #F39F0B">
+    <div class="row">
+        <div class="col-md-4 justify-content-center align-self-center">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+        <div class="col-md-4 ml-auto d-flex flex-row-reverse">
+            <a asp-action="Create" class="btn btn-black">Inserir Novo Nível</a>
+        </div>
+    </div>
+</div>
+<table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th scope="col" class="col-md-11">
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th scope="col" class="col-md-1 text-center">
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr scope="row" class="d-flex">
+                <td class="col-md-11">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td class="col-md-1">
+                    <div class="row">
+                        <div class="col-md-4 text-center" style="padding-left: 10px; padding-right: 0px;">
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i style="font-size: 13.5pt;" class="fas fa-edit text-warning" title="Editar"></i></a>
+                        </div>
+                        <div class="col-md-4 text-center" style="padding-left: 5.5px; padding-right: 5px;">
+                            <a asp-action="Details" asp-route-id="@item.Id"><i style=" font-size: 13.5pt;" class="fas fa-eye" title="Ver Detalhes"></i></a>
+                        </div>
+                        <div class="col-md-4 text-center" style="padding-left: 0px; padding-right: 10px;">
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i style="font-size: 13.5pt;" class="fas fa-trash text-danger" title="Excluir"></i></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

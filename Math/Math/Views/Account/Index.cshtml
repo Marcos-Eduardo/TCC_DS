@@ -1,0 +1,107 @@
+﻿@model X.PagedList.IPagedList<Usuario>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Usuários";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<form asp-controller="Account" asp-action="Index" method="get">
+    <div class="container" style="background-color: #F39F0B">
+        <div class="row">
+            <div class="col-md-3 justify-content-center align-self-center">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-md-5 justify-content-center align-self-center">
+                <input type="text" name="Pesquisa" class="form-control" value="@ViewData["Filtro"]"
+                       placeholder="E-mail a pesquisar" aria-label="" aria-describedby="basic-addon1" />
+            </div>
+            <div class="col-md-4 ml-auto d-flex flex-row-reverse">
+                <a asp-action="Create" class="btn btn-black">Inserir Novo Usuário</a>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th scope="col" class="col-md-3">E-mail</th>
+            <th scope="col" class="col-md-3">Nome</th>
+            <th scope="col" class="col-md-3">Data de Nascimento</th>
+            <th scope="col" class="col-md-2">Perfil</th>
+            <th scope="col" class="col-md-1 text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr scope="row" class="d-flex">
+                <td scope="col" class="col-md-3">
+                    <span class="align-self-center">
+                        @if (item.Email.Length > 32)
+                        {
+                            var email = item.Email.Substring(0, 32);
+                            @Html.DisplayFor(modelItem => email)<span>...</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Email)
+                        }
+                    </span>
+                </td>
+                <td scope="col" class="col-md-3 d-flex">
+                    <span class="align-self-center">
+                        @if (item.Nome.Length > 32)
+                        {
+                            var nome = item.Nome.Substring(0, 32);
+                            @Html.DisplayFor(modelItem => nome)<span>...</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        }
+                    </span>
+                </td>
+                <td scope="col" class="col-md-3 d-flex">
+                    <span class="align-self-center">
+                        @Html.DisplayFor(modelItem => item.DataNascimento)
+                    </span>
+                </td>
+                <td scope="col" class="col-md-2 d-flex">
+                    <span class="align-self-center">
+                        @Html.DisplayFor(modelItem => item.Roles)
+                    </span>
+                </td>
+                <td class="col-md-1 d-flex">
+                    <div class="align-self-center">
+                        <div class="row">
+                            <div class="col-md-4 text-center" style="padding-left: 12px; padding-right: 0px;">
+                                <a asp-action="Edit" asp-route-id="@item.Id"><i style="font-size: 13.5pt;" class="fas fa-edit text-warning" title="Editar"></i></a>
+                            </div>
+                            <div class="col-md-4 text-center" style="padding-left: 7px; padding-right: 10px;">
+                                <a asp-action="Details" asp-route-id="@item.Id"><i style=" font-size: 13.5pt;" class="fas fa-eye" title="Ver Detalhes"></i></a>
+                            </div>
+                            <div class="col-md-4 text-center" style="padding-left: 0px; padding-right: 12px;">
+                                <a asp-action="Delete" asp-route-id="@item.Id"><i style="font-size: 13.5pt;" class="fas fa-trash text-danger" title="Excluir"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, pagina => Url.Action("Index", new { filtro = ViewData["Filtro"], pagina }),
+                    new X.PagedList.Web.Common.PagedListRenderOptionsBase
+                    {
+                        DisplayLinkToFirstPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                        DisplayLinkToLastPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                        DisplayLinkToNextPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                        DisplayLinkToPreviousPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                        ContainerDivClasses = new[] { "pagination-container" },
+                        UlElementClasses = new string[] { "pagination justify-content-center" },
+                        LiElementClasses = new string[] { "page-item" },
+                        PageClasses = new string[] { "page-link" }
+                    }
+    )

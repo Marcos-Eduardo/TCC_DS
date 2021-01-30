@@ -1,0 +1,126 @@
+﻿@model PerfilViewModel
+
+@{
+    ViewData["Title"] = "Perfil";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-bt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="~/fe/assets/images/logomarca-1.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link href="~/fe/LoginRegister/css/style.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+
+<body>
+    <div class="container sign-up-mode">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form asp-controller="Account" asp-action="Perfil" id="form" method="post" class="sign-up-form" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed" data-ajax-failure="failed">
+                    <div asp-validation-summary="ModelOnly" data-valmsg-for="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <h2 class="title">Perfil</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input asp-for="Nome" id="Nome" name="Nome" onkeydown="keydownInput()" />
+                    </div>
+                    <span asp-validation-for="Nome" data-valmsg-for="Nome" class="text-danger"></span>
+                    <div class="input-field">
+                        <i class="fas fa-user-circle"></i>
+                        <input asp-for="Apelido" id="Apelido" name="Apelido" onkeydown="keydownInput()" />
+                    </div>
+                    <span asp-validation-for="Apelido" data-valmsg-for="Apelido" class="text-danger"></span>
+                    <div class="input-field">
+                        <i class="fas fa-calendar"></i>
+                        <input asp-for="DataNascimento" id="DataNascimento" name="DataNascimento" />
+                    </div>
+                    <span asp-validation-for="DataNascimento" data-valmsg-for="DataNascimento" class="text-danger"></span>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input asp-for="Email" id="Email" name="Email" readonly />
+                    </div>
+                    <span asp-validation-for="Email" data-valmsg-for="EmailRegister" class="text-danger"></span>
+                    <input type="submit" class="btn" id="btn" value="Alterar" />
+                </form>
+            </div>
+        </div>
+
+        <div class="panels-container">
+            <div class="panel left-panel">
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Já vi ou alterei meu perfil ?</h3>
+                    <p>
+                        Se você já viu ou alterou seu perfil clique no botão abaixo para voltar a página anterior!
+                    </p>
+                    <button class="btn transparent" id="login-btn">
+                        Voltar
+                    </button>
+                </div>
+                <img src="~/fe/LoginRegister/img/profile.svg" class="image" />
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        const login_btn = document.querySelector("#login-btn");
+
+        login_btn.addEventListener("click", () => {
+            window.history.back()
+        });
+
+        window.addEventListener('load', function () {
+            document.getElementById("btn").style.display = 'none';
+        });
+
+        document.getElementById('form').addEventListener('change', function () {
+            document.getElementById("btn").style.display = 'block';
+        });
+
+        function keydownInput() {
+            document.getElementById("btn").style.display = 'block';
+        }
+
+        completed = function (xhr) {
+            if (xhr.responseJSON == 1) {
+                swal({
+                    title: "Usuário Atualizado com Sucesso!",
+                    text: "Você acaba de atualizar seus dados, clique em OK para voltar a tela Home!",
+                    icon: "success",
+                    button: "OK"
+                }).then(function () {
+                    window.location.href = '@Url.Action("Index", "Home")';
+                });
+            }
+
+            if (xhr.responseJSON.success == false) {
+                swal({
+                    title: "Problemas ao Enviar!",
+                    text: "Ocorreu um problema no envio de seus dados! Por favor, tente novamente em alguns instante!",
+                    icon: "error",
+                    button: "OK"
+                });
+            }
+        }
+        failed = function (xhr) {
+            swal({
+                title: "Problemas ao Enviar!",
+                text: "Ocorreu um problema no envio de sua mensagem! Por favor, tente novamente em alguns instante!",
+                icon: "warning",
+                button: "OK"
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+﻿@model Questao
+
+@{
+    ViewData["Title"] = "Detalhes da Questão";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row text-center" style="background-color: #F39F0B">
+        <div class="col-md-12" style="margin-top: 10px;">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered">
+    <tbody>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Titulo)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Alternativa1)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Alternativa1)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Alternativa2)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Alternativa2)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Alternativa3)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Alternativa3)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Alternativa4)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Alternativa4)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Resposta)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Resposta)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th scope="col" class="col-md-2 text-center border-secondary table-dark">
+                @Html.DisplayNameFor(model => model.Quiz)
+            </th>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Quiz.Titulo)
+            </td>
+        </tr>
+        <tr scope="row" class="d-flex">
+            <th class="col-md-2 text-center border-secondary table-dark d-flex">
+                <span class="justify-content-center align-self-center mx-auto">Ações</span>
+            </th>
+            <td class="col-md-10">
+                <div class="row offset-md-3">
+                    <div class="col-md-4">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

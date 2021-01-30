@@ -1,0 +1,91 @@
+﻿@model Contato
+@{
+    ViewData["Title"] = "Contato";
+}
+
+<section class="mbr-section form4 cid-rI1BhZL5xM" id="form4-9">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7372.799241447756!2d-48.5490312!3d-22.489185!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c7459baabaa92b%3A0xd1b954a115160672!2sEtec%20Comendador%20Jo%C3%A3o%20Rays!5e0!3m2!1spt-BR!2sbr!4v1573940589538!5m2!1spt-BR!2sbr" allowfullscreen=""></iframe></div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="pb-3 align-left mbr-fonts-style display-2">
+                    Fale Conosco
+                </h2>
+                <div>
+                    <div class="icon-block pb-3 align-left">
+                        <span class="icon-block__icon">
+                            <span class="mbri-letter mbr-iconfont"></span>
+                        </span>
+                        <h4 class="icon-block__title align-left mbr-fonts-style display-5">Deixe sua mensagem</h4>
+                    </div>
+                    <div class="icon-contacts pb-3">
+                        <h5 class="align-left mbr-fonts-style display-7">
+                            Dados para contato
+                        </h5>
+                        <p class="mbr-text align-left mbr-fonts-style display-7">
+                            Phone: (14) 3641-1310<br>
+                            Email: math4few@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div data-form-type="formoid">
+                    <!---Formbuilder Form--->
+                    <form class="mbr-form form-with-styler" method="post" asp-controller="Home" asp-action="Contato" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed" data-ajax-failure="failed">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="dragArea row">
+                            <div class="col-md-6  form-group" data-for="name">
+                                <input asp-for="Nome" class="form-control input display-7" id="name-form4-9">
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6  form-group" data-for="phone">
+                                <input asp-for="Telefone" class="form-control input display-7" id="phone-form4-9">
+                                <span asp-validation-for="Telefone" class="text-danger"></span>
+                            </div>
+                            <div data-for="email" class="col-md-12  form-group">
+                                <input asp-for="Email" class="form-control input display-7" id="email-form4-9">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div data-for="message" class="col-md-12  form-group">
+                                <textarea asp-for="Mensagem" class="form-control input display-7" id="message-form4-9"></textarea>
+                                <span asp-validation-for="Mensagem" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12 input-group-btn  mt-2 align-center"><button type="submit" class="btn btn-primary btn-form display-4">ENVIAR</button></div>
+                        </div>
+                    </form><!---Formbuilder Form--->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        completed = function (xhr) {
+            if (xhr.responseJSON.message == "Enviado") {
+                swal({
+                    title: "Mensagem Enviada Com Sucesso!",
+                    text: "Muito obrigado por deixar sua menssagem!",
+                    icon: "success",
+                    button: "OK"
+                }).then(function () {
+                    window.location.href = '@Url.Action("Index", "Home")';
+                });
+            }
+        }
+        failed = function (xhr) {
+            swal({
+                title: "Problemas ao Enviar!",
+                text: "Ocorreu um problema no envio de sua mensagem! Por favor, tente novamente em alguns instante!",
+                icon: "warning",
+                button: "OK"
+            });
+        }
+    </script>
+}
+
+

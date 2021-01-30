@@ -1,0 +1,109 @@
+﻿@model X.PagedList.IPagedList<Dica>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Dicas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<form asp-controller="Dicas" asp-action="Index" method="get">
+    <div class="container" style="background-color: #F39F0B">
+        <div class="row">
+            <div class="col-md-2 justify-content-center align-self-center">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-md-6 justify-content-center align-self-center">
+                <input type="text" name="Pesquisa" class="form-control" value="@ViewData["Filtro"]"
+                       placeholder="Título a pesquisar" aria-label="" aria-describedby="basic-addon1" />
+            </div>
+            <div class="col-md-4 ml-auto d-flex flex-row-reverse">
+                <a asp-action="Create" class="btn btn-black">Inserir Nova Dica</a>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th scope="col" class="col-md-3">Titulo</th>
+            <th scope="col" class="col-md-5">Descrição</th>
+            <th scope="col" class="col-md-3">Conteúdo</th>
+            <th scope="col" class="col-md-1 text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr scope="row" class="d-flex">
+                <td scope="col" class="col-md-3 d-flex" colspan="2">
+                    @if (item.Titulo.Length > 60)
+                    {
+                        var titulo = item.Titulo.Substring(0, 60);
+                        @Html.DisplayFor(modelItem => titulo)<span>...</span>
+                    }
+                    else
+                    {
+                        <span class="align-self-center">
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </span>
+                    }
+                </td>
+                <td scope="col" class="col-md-5 d-flex">
+                    <span class="align-self-center">
+                        @if (item.Descricao.Length > 52)
+                        {
+                            var descricao = item.Descricao.Substring(0, 52);
+                            @Html.DisplayFor(modelItem => descricao)<span>...</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        }
+                    </span>
+                </td>
+                <td scope="col" class="col-md-3 d-flex" colspan="2">
+
+                    @if (item.Conteudo.Titulo.Length > 60)
+                    {
+                        var tituloConteudo = item.Conteudo.Titulo.Substring(0, 60);
+                        @Html.DisplayFor(modelItem => tituloConteudo)<span>...</span>
+                    }
+                    else
+                    {
+                        <span class="align-self-center">
+                            @Html.DisplayFor(modelItem => item.Conteudo.Titulo)
+                        </span>
+                    }
+
+                </td>
+                <td class="col-md-1 d-flex">
+                    <div class="row align-self-center" style="padding-left: 5px;">
+                        <div class="col-md-4 text-center" style="padding-left: 5px; padding-right: 0px;">
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i style="font-size: 14pt;" class="fas fa-edit text-warning" title="Editar"></i></a>
+                        </div>
+                        <div class="col-md-4 text-center" style="padding-left: 5.5px; padding-right: 5.5px;">
+                            <a asp-action="Details" asp-route-id="@item.Id"><i style=" font-size: 14pt;" class="fas fa-eye" title="Ver Detalhes"></i></a>
+                        </div>
+                        <div class="col-md-4 text-center" style="padding-left: 5px; padding-right: 5px;">
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i style="font-size: 14pt;" class="fas fa-trash text-danger" title="Excluir"></i></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, pagina => Url.Action("Index", new { filtro = ViewData["Filtro"], pagina }),
+                new X.PagedList.Web.Common.PagedListRenderOptionsBase
+                {
+                    DisplayLinkToFirstPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                    DisplayLinkToLastPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                    DisplayLinkToPreviousPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                    ContainerDivClasses = new[] { "pagination-container" },
+                    UlElementClasses = new string[] { "pagination justify-content-center" },
+                    LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" }
+                }
+)
